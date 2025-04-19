@@ -670,3 +670,7 @@ a {
 		color: var(--text-color-light);
 }
 
+.svg {
+	transform: rotate(45deg);
+	transition: transform .3s ease-in-out;
+}
