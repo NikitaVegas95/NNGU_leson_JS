@@ -191,28 +191,8 @@
 		</section>
 
 		<section class="section">
-				<div class="container wrapper-card">
+				<div id="cards" class="container wrapper-card">
 						<h2>Недавно купили</h2>
-						<div class="section-card recently-bought1">
-								<img src="../sputnik/images/products/product-1.jpg" alt="Кросс-боди VERA">
-								<h5 class="title-recently-bought">Кросс-боди VERA</h5>
-								<span>3 260 ₽</span>
-						</div>
-						<div class="section-card recently-bought2">
-								<img src="../sputnik/images/products/product-2.jpg" alt="Тоут MARCEL">
-								<h5 class="title-recently-bought">Тоут MARCEL</h5>
-								<span>12 650 ₽</span>
-						</div>
-						<div class="section-card recently-bought3">
-								<img src="../sputnik/images/products/product-3.jpg" alt="Рюкзак М1">
-								<h5 class="title-recently-bought">Рюкзак М1</h5>
-								<span>4 650 ₽</span>
-						</div>
-						<div class="section-card recently-bought4">
-								<img src="../sputnik/images/products/product-4.jpg" alt="Поясная сумка INGE">
-								<h5 class="title-recently-bought">Поясная сумка INGE</h5>
-								<span>2 990 ₽</span>
-						</div>
 				</div>
 		</section>
 
@@ -299,8 +279,11 @@
 						<!-- Модальное окно -->
 						<div id="modal" class="modal">
 								<span class="close">&times;</span>
-								<img class="modal-content" id="modal-img">
-								<div class="caption" id="caption"></div>
+							<img class="modal-content" id="modal-img" src="" alt="">
+							<div class="caption" id="caption">
+								<button id="modal-btn" class="modal-btn">BUY</button>
+							</div>
+
 						</div>
 				</div>
 		</section>
@@ -314,7 +297,7 @@
 								<div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/47/nizhny-novgorod/?utm_medium=mapframe&utm_source=maps"
 											style="color:#eee;font-size:12px;position:absolute;top:0px;">Нижний Новгород</a>
 										<a href="https://yandex.ru/maps/profile?ll=43.935624%2C56.312919&utm_campaign=desktop&utm_medium=mapframe&utm_source=maps&z=13"
-											 style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс Карты</a>
+											 style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс Карты</a>
 										<iframe src="https://yandex.ru/map-widget/v1/profile?ll=43.935624%2C56.312919&utm_campaign=desktop&utm_medium=search&utm_source=maps&z=13"
 											 width="100%" height="457" frameborder="1" allowfullscreen="true"
 												style="position:relative;border:none"></iframe>
@@ -382,9 +365,27 @@
 
 </footer>
 
+<div id="cartModal" class="cart-modal">
+    <div class="cart-modal-content">
+        <span class="cart-close">&times;</span>
+        <h2>Корзина</h2>
+        <div id="cartItems" class="cart-items">
+            <!-- Cart items will be displayed here -->
+        </div>
+        <div class="cart-actions">
+            <div class="cart-total">
+                <span>Итого: </span>
+                <span id="cartTotalPrice">0 ₽</span>
+            </div>
+            <button class="clear-cart" id="clearCart">Очистить корзину</button>
+        </div>
+    </div>
+</div>
+
 <script src="../sputnik/js/jquery-3.5.1.min.js"></script>
 <script src="../sputnik/js/slick.min.js"></script>
 <script src="../sputnik/js/jquery.fancybox.min.js"></script>
+<script src="js/mockCards.js"></script>
 <script src="js/main.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
