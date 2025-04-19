@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ru">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport"
+					content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Слайдер</title>
+		<style>
+				* {
+						margin: 0;
+						padding: 0;
+						box-sizing: border-box;
+						font-family: 'Arial', sans-serif;
+				}
+
+				.slider-container {
+						position: relative;
+						max-width: 1200px;
+						margin: 0 auto;
+						overflow: hidden;
+				}
+
+				.slider {
+						display: flex;
+						transition: transform 0.5s ease;
+						height: 500px;
+				}
+
+				.slide {
+						min-width: 100%;
+						position: relative;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: flex-start;
+						padding: 0 100px;
+						color: white;
+				}
+
+				.slide:nth-child(1) {
+						background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+				}
+
+				.slide:nth-child(2) {
+						background: linear-gradient(135deg, #f9ca24, #f6e58d);
+				}
+
+				.slide:nth-child(3) {
+						background: linear-gradient(135deg, #686de0, #4834d4);
+				}
+
+				.slide h1 {
+						font-size: 48px;
+						margin-bottom: 20px;
+						text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+				}
+
+				.slide p {
+						font-size: 24px;
+						margin-bottom: 30px;
+				}
+
+				.slide-btn {
+						padding: 12px 30px;
+						background: white;
+						border: none;
+						border-radius: 25px;
+						font-size: 18px;
+						font-weight: bold;
+						cursor: pointer;
+						transition: all 0.3s;
+				}
+
+				.slide-btn:hover {
+						transform: translateY(-3px);
+						box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+				}
+
+				.slider-nav {
+						position: absolute;
+						bottom: 30px;
+						left: 50%;
+						transform: translateX(-50%);
+						display: flex;
+				}
+
+				.slider-dot {
+						width: 12px;
+						height: 12px;
+						border-radius: 50%;
+						background: rgba(255,255,255,0.5);
+						margin: 0 5px;
+						cursor: pointer;
+						transition: background 0.3s;
+				}
+
+				.slider-dot.active {
+						background: white;
+				}
+
+				.slider-arrow {
+						position: absolute;
+						top: 50%;
+						transform: translateY(-50%);
+						width: 50px;
+						height: 50px;
+						background: rgba(255,255,255,0.3);
+						border-radius: 50%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						cursor: pointer;
+						font-size: 24px;
+						color: white;
+						transition: all 0.3s;
+				}
+
+				.slider-arrow:hover {
+						background: rgba(255,255,255,0.5);
+				}
+
+				.slider-arrow.prev {
+						left: 20px;
+				}
+
+				.slider-arrow.next {
+						right: 20px;
+				}
+		</style>
+
+<body>
+
+<div class="slider-container">
+		<div class="slider">
+				<div class="slide">
+						<h1>Скидки 25%</h1>
+						<p>на летнюю коллекцию</p>
+						<button class="slide-btn">Подробнее</button>
+				</div>
+				<div class="slide">
+						<h1>Желтый цвет</h1>
+						<p>всегда в моде</p>
+						<button class="slide-btn">Подробнее</button>
+				</div>
+				<div class="slide">
+						<h1>Новый взгляд</h1>
+						<p>на привычные вещи</p>
+						<button class="slide-btn">Посмотреть</button>
+				</div>
+		</div>
+
+		<div class="slider-nav">
+				<div class="slider-dot active" data-slide="0"></div>
+				<div class="slider-dot" data-slide="1"></div>
+				<div class="slider-dot" data-slide="2"></div>
+		</div>
+
+		<div class="slider-arrow prev">❮</div>
+		<div class="slider-arrow next">❯</div>
+</div>
+
+<script>
+		document.addEventListener('DOMContentLoaded', function() {
+				const slider = document.querySelector('.slider');
+				const slides = document.querySelectorAll('.slide');
+				const dots = document.querySelectorAll('.slider-dot');
+				const prevBtn = document.querySelector('.prev');
+				const nextBtn = document.querySelector('.next');
+
+				let currentSlide = 0;
+				const slideCount = slides.length;
+
+				function goToSlide(slideIndex) {
+						slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+						currentSlide = slideIndex;
+
+						// Обновляем активную точку
+						dots.forEach(dot => dot.classList.remove('active'));
+						dots[currentSlide].classList.add('active');
+				}
+
+				function nextSlide() {
+						currentSlide = (currentSlide + 1) % slideCount;
+						goToSlide(currentSlide);
+				}
+
+				function prevSlide() {
+						currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+						goToSlide(currentSlide);
+				}
+
+				// Клик по точкам
+				dots.forEach(dot => {
+						dot.addEventListener('click', function() {
+								const slideIndex = parseInt(this.getAttribute('data-slide'));
+								goToSlide(slideIndex);
+						});
+				});
+
+				// Кнопки вперед/назад
+				nextBtn.addEventListener('click', nextSlide);
+				prevBtn.addEventListener('click', prevSlide);
+
+				// Автопереключение
+				let slideInterval = setInterval(nextSlide, 5000);
+
+				// Остановка автопереключения при наведении
+				slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
+				slider.addEventListener('mouseleave', () => slideInterval = setInterval(nextSlide, 5000));
+		});
+</script>
+</body>
+</html>
+
+
+
+
+
